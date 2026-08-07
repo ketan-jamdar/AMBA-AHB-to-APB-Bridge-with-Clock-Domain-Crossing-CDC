@@ -152,3 +152,155 @@ The Response Synchronizer safely transfers APB responses back to the AHB clock d
 The handshake mechanism guarantees that every APB read response is transferred exactly once without data corruption.
 
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/6bd4493c-183e-4ca2-b6ad-063fe8992175" />
+
+---
+
+# 🧩 RTL Module Description
+
+The bridge is implemented using a modular RTL architecture. Each module performs a dedicated function, improving readability, scalability, and ease of verification.
+
+| Module | Description |
+|---------|-------------|
+| **ahb_apb_pkg.sv** | Package containing shared parameters, typedefs, and transaction structures used throughout the design. |
+| **ahb_interface.sv** | Implements the AHB slave interface, captures AHB transactions, writes requests into the asynchronous FIFO, and returns synchronized read responses to the AHB master. |
+| **async_fifo.sv** | Dual-clock asynchronous FIFO used for Clock Domain Crossing (CDC) between HCLK and PCLK domains using Gray-coded pointers. |
+| **apb_controller.sv** | Implements the APB controller FSM that reads transactions from the FIFO and generates APB protocol signals. |
+| **response_synchronizer.sv** | Safely transfers read data, response status, and valid indication from the APB clock domain back to the AHB clock domain. |
+| **ahb_apb_top.sv** | Top-level module integrating all RTL blocks into a complete AHB-to-APB bridge. |
+
+---
+
+# 🔍 UVM Verification Environment
+
+The bridge is verified using a reusable **Universal Verification Methodology (UVM)** testbench designed to validate protocol compliance, functional correctness, and corner-case behavior.
+
+### Verification Components
+
+- Test
+- Environment (env)
+- AHB Agent
+- APB Agent
+- Driver
+- Monitor
+- Sequencer
+- Sequences
+- Scoreboard
+- Functional Coverage
+- Interface
+- Top-Level Testbench
+
+### Verification Flow
+
+```text
+                Test
+                  │
+                  ▼
+          UVM Environment
+                  │
+     ┌────────────┴────────────┐
+     │                         │
+     ▼                         ▼
+ AHB Agent                 APB Agent
+     │                         │
+     ▼                         ▼
+ Driver                     Monitor
+     │                         │
+     └────────────┬────────────┘
+                  ▼
+             DUT (RTL)
+                  │
+         ┌────────┴────────┐
+         ▼                 ▼
+   Scoreboard        Functional Coverage
+```
+
+---
+
+# ✅ Verification Scenarios
+
+The following functionality is verified using UVM sequences:
+
+- AHB Write Transactions
+- AHB Read Transactions
+- Single Read and Write Transfers
+- Consecutive Transactions
+- FIFO Full Condition
+- FIFO Empty Condition
+- APB Wait-State Handling (PREADY)
+- PSLVERR Response Handling
+- Read Response Synchronization
+- Clock Domain Crossing (CDC)
+- Reset Functionality
+- Boundary Address Verification
+
+---
+
+# 📊 Simulation Results
+
+Simulation waveforms generated using **Siemens QuestaSim** verify the correct operation of the complete bridge.
+
+The simulation demonstrates:
+
+- Successful AHB Write Transactions
+- Successful AHB Read Transactions
+- Correct APB Signal Generation
+- FIFO Read and Write Operations
+- Proper Clock Domain Crossing
+- Correct Read Response Synchronization
+- Wait-State Handling using PREADY
+- PSLVERR Propagation
+- Functional Correctness of APB Controller FSM
+
+Simulation waveforms are available in the **simulation/waveforms/** directory.
+
+---
+
+# 🛠️ Tools Used
+
+| Tool | Purpose |
+|------|---------|
+| SystemVerilog | RTL Design |
+| UVM | Functional Verification |
+| Siemens QuestaSim | Simulation & Waveform Analysis |
+| Git | Version Control |
+| GitHub | Repository Management |
+
+---
+
+# 🚀 How to Run
+
+Compile the RTL and UVM environment using your simulator.
+
+Example QuestaSim flow:
+
+```tcl
+vlib work
+
+vlog RTL/*.sv
+
+vlog UVM/**/*.sv
+
+vsim tb_top
+
+run -all
+```
+
+After simulation, inspect the generated waveform and verify protocol correctness.
+
+---
+
+# 📈 Future Improvements
+
+The current implementation provides a robust CDC-enabled bridge architecture. Future enhancements may include:
+
+- Support for Multiple APB Slaves
+- Address Decoder for Peripheral Selection
+- Burst Transfer Support
+- APB4 Protocol Extensions
+- Enhanced Functional Coverage
+- Assertion-Based Verification (SVA)
+- Formal Verification
+- Performance Optimization
+- FPGA Prototyping
+
+---
