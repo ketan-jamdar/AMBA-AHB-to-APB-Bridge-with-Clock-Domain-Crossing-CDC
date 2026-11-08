@@ -102,7 +102,7 @@ The AHB Interface acts as a slave interface that captures AHB read and write tra
 - HREADYOUT and HRESP Generation
 - Two-Cycle AHB Error Response Handling
 
-<img width="1671" height="941" alt="AHB Interface Block Diagram" src="images/ahb_interface.png" />
+<img width="1717" height="916" alt="Image" src="https://github.com/user-attachments/assets/545855d9-59a2-410f-9bca-940921a688a3" />
 
 ---
 
