@@ -123,7 +123,7 @@ The Asynchronous FIFO safely transfers transactions between the **HCLK** and **P
 
 The FIFO eliminates metastability by synchronizing Gray-coded pointers between clock domains.
 
-<img width="1672" height="941" alt="Image" src="https://github.com/user-attachments/assets/4de8d002-d972-4993-b555-289444cbbe0c" />
+<img width="1668" height="943" alt="Image" src="https://github.com/user-attachments/assets/dc58cb07-4356-4efd-9f91-99e80cbe31d7" />
 
 ---
 
