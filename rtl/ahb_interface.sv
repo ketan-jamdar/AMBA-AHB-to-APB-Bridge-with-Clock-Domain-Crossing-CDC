@@ -10,7 +10,6 @@ module ahb_interface #(
 
     // AHB Slave Interface
     input  logic HSEL,
-    input  logic HREADY,
     input  logic [1:0] HTRANS,
     input  logic HWRITE,
     input  logic [2:0] HSIZE,
