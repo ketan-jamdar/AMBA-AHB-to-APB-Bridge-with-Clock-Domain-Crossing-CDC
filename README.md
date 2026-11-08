@@ -57,7 +57,7 @@ The bridge is divided into two independent clock domains:
 
 ---
 
-<img width="1671" height="941" alt="Image" src="https://github.com/user-attachments/assets/fa2e73a1-fa1c-454a-b922-7949e331a165" />
+<img width="1672" height="941" alt="Image" src="https://github.com/user-attachments/assets/f68bf361-43f7-466f-87ad-a4d4b3704591" />
 
 ---
 
