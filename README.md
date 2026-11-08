@@ -189,52 +189,6 @@ The bridge is implemented using a modular RTL architecture. Each module performs
 
 ---
 
-# 🔍 UVM Verification Environment
-
-The bridge is verified using a reusable **Universal Verification Methodology (UVM)** testbench designed to validate protocol compliance, functional correctness, and corner-case behavior.
-
-### Verification Components
-
-- Test
-- Environment (env)
-- AHB Agent
-- APB Agent
-- Driver
-- Monitor
-- Sequencer
-- Sequences
-- Scoreboard
-- Functional Coverage
-- Interface
-- Top-Level Testbench
-
-### Verification Flow
-
-```text
-                Test
-                  │
-                  ▼
-          UVM Environment
-                  │
-     ┌────────────┴────────────┐
-     │                         │
-     ▼                         ▼
- AHB Agent                 APB Agent
-     │                         │
-     ▼                         ▼
- Driver                     Monitor
-     │                         │
-     └────────────┬────────────┘
-                  ▼
-             DUT (RTL)
-                  │
-         ┌────────┴────────┐
-         ▼                 ▼
-   Scoreboard        Functional Coverage
-```
-
----
-
 # ✅ Verification Scenarios
 
 The following functionality is verified using UVM sequences:
@@ -283,43 +237,5 @@ Simulation waveforms are available in the **simulation/waveforms/** directory.
 | Siemens QuestaSim | Simulation & Waveform Analysis |
 | Git | Version Control |
 | GitHub | Repository Management |
-
----
-
-# 🚀 How to Run
-
-Compile the RTL and UVM environment using your simulator.
-
-Example QuestaSim flow:
-
-```tcl
-vlib work
-
-vlog RTL/*.sv
-
-vlog UVM/**/*.sv
-
-vsim tb_top
-
-run -all
-```
-
-After simulation, inspect the generated waveform and verify protocol correctness.
-
----
-
-# 📈 Future Improvements
-
-The current implementation provides a robust CDC-enabled bridge architecture. Future enhancements may include:
-
-- Support for Multiple APB Slaves
-- Address Decoder for Peripheral Selection
-- Burst Transfer Support
-- APB4 Protocol Extensions
-- Enhanced Functional Coverage
-- Assertion-Based Verification (SVA)
-- Formal Verification
-- Performance Optimization
-- FPGA Prototyping
 
 ---
