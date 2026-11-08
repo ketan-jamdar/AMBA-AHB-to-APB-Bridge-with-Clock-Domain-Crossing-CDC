@@ -67,7 +67,6 @@ module ahb2apb_bridge_top #(
         .HCLK (HCLK),
         .HRESETn (HRESETn),
         .HSEL (HSEL),
-        .HREADY (HREADY),
         .HTRANS (HTRANS),
         .HWRITE (HWRITE),
         .HSIZE (HSIZE),
