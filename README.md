@@ -87,6 +87,46 @@ The bridge supports both **AHB Write** and **AHB Read** transactions.
 
 ---
 
+# 🔷 AHB Interface
+
+The AHB Interface acts as a slave interface that captures AHB read and write transactions, transfers requests to the Asynchronous FIFO, and returns synchronized responses to the AHB Master.
+
+### Key Responsibilities
+
+- AHB Address Phase Detection
+- Read and Write Transaction Acceptance
+- Write Data Phase Handling using `write_pending`
+- Transaction Packet Generation
+- Asynchronous FIFO Interface
+- Read Response Handling
+- HREADYOUT and HRESP Generation
+- Two-Cycle AHB Error Response Handling
+
+<img width="1671" height="941" alt="AHB Interface Block Diagram" src="images/ahb_interface.png" />
+
+---
+
+# 📦 Asynchronous FIFO (CDC Buffer)
+
+The Asynchronous FIFO safely transfers transactions between the **HCLK** and **PCLK** domains.
+
+### Features
+
+- Dual Clock FIFO
+- Independent Read/Write Clocks
+- Gray Code Pointer Synchronization
+- Binary Pointer Management
+- Full Detection Logic
+- Empty Detection Logic
+- Two-Flip-Flop Synchronizers
+- Safe Clock Domain Crossing
+
+The FIFO eliminates metastability by synchronizing Gray-coded pointers between clock domains.
+
+<img width="1672" height="941" alt="Image" src="https://github.com/user-attachments/assets/4de8d002-d972-4993-b555-289444cbbe0c" />
+
+---
+
 # ⚙️ APB Controller FSM
 
 The APB Controller controls every APB transaction using a Finite State Machine.
@@ -111,27 +151,6 @@ The FSM supports:
 - Continuous FIFO Processing
 
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/02c27ea9-0b79-46df-8c18-7b59475a4401" />
-
----
-
-# 📦 Asynchronous FIFO (CDC Buffer)
-
-The Asynchronous FIFO safely transfers transactions between the **HCLK** and **PCLK** domains.
-
-### Features
-
-- Dual Clock FIFO
-- Independent Read/Write Clocks
-- Gray Code Pointer Synchronization
-- Binary Pointer Management
-- Full Detection Logic
-- Empty Detection Logic
-- Two-Flip-Flop Synchronizers
-- Safe Clock Domain Crossing
-
-The FIFO eliminates metastability by synchronizing Gray-coded pointers between clock domains.
-
-<img width="1672" height="941" alt="Image" src="https://github.com/user-attachments/assets/4de8d002-d972-4993-b555-289444cbbe0c" />
 
 ---
 
